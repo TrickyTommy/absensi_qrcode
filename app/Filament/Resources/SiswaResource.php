@@ -17,7 +17,9 @@ use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Collection;
 
 class SiswaResource extends Resource
 {
@@ -146,8 +148,16 @@ class SiswaResource extends Resource
                 DeleteAction::make()
                     ->icon('heroicon-o-trash'),
             ])
+            //hapus data terpilih
+
             ->bulkActions([
-                //
+                BulkAction::make('delete')
+                    ->label('Hapus Data Terpilih')
+                    ->icon('heroicon-o-trash')
+                    ->color('danger')
+                    ->action(fn (Collection $records) => $records->each->delete())
+                    ->requiresConfirmation()
+                    ->deselectRecordsAfterCompletion()
             ]);
     }
 
