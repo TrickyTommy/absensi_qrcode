@@ -2,24 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SiswaResource\Pages;
 use App\Models\Siswa;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables\Columns\ViewColumn;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\Image\SvgImageBackEnd;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
-use Filament\Forms\Components\TextInput;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\DeleteAction;
+use BaconQrCode\Renderer\ImageRenderer;
 use Filament\Tables\Actions\BulkAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Collection;
+use App\Filament\Resources\SiswaResource\Pages;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 
 class SiswaResource extends Resource
 {
@@ -42,8 +43,22 @@ class SiswaResource extends Resource
         return $form
             ->schema([
                 TextInput::make('nis')
-                    ->required()
-                    ->maxLength(255),
+                ->label('NIS')
+                ->required()
+                ->unique(table: 'siswas', ignoreRecord: true)
+                ->rules(['required', 'string', 'max:255'])
+                ->validationAttribute('NIS')
+                ->placeholder('Masukkan NIS')
+                ->afterStateUpdated(function (string $state, $set) {
+                    if (Siswa::where('nis', $state)->exists()) {
+                        $set('nis', '');
+                        Notification::make()
+                            ->title('NIS sudah digunakan!')
+                            ->danger()
+                            ->send();
+                    }
+                }),
+
                 TextInput::make('nama')
                     ->required()
                     ->maxLength(255),

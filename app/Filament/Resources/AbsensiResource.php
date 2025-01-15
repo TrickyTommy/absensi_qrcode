@@ -47,8 +47,8 @@ class AbsensiResource extends Resource
                                 $siswa = Siswa::where('nis', $state)->first();
                                 if ($siswa) {
                                     $set('siswa_id', $siswa->id);
-                                    $set('tanggal', now()->toDateString());
-                                    $set('jam_masuk', now()->toTimeString());
+                                    $set('tanggal', now()->setTimezone('Asia/Jakarta')->toDateString());
+                                    $set('jam_masuk', Carbon::now()->setTimezone('Asia/Jakarta')->format('H:i:s'));
                                 }
                             })
                             ->dehydrated(false),

@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources\AbsensiResource\Pages;
 
+use Carbon\Carbon;
 use App\Models\Siswa;
 use App\Models\Absensi;
 use Filament\Resources\Pages\Page;
-use App\Filament\Resources\AbsensiResource;
 use Illuminate\Support\Facades\DB;
 use Filament\Notifications\Notification;
+use App\Filament\Resources\AbsensiResource;
 
 class ScanQrcode extends Page
 {
@@ -60,7 +61,7 @@ class ScanQrcode extends Page
             Absensi::create([
                 'siswa_id' => $siswa->id,
                 'tanggal' => today(),
-                'jam_masuk' => now(),
+                'jam_masuk' => now()->setTimezone('Asia/Jakarta')->format('H:i:s'),
                 'status' => 'hadir',
             ]);
 
