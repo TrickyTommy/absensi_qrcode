@@ -89,6 +89,13 @@
                 </div>
             </div>
         </div>
+
+        <!-- Button to access barcode scanner -->
+        <div class="text-center mt-6">
+            <a href="{{ \App\Filament\Resources\AbsensiResource::getUrl('scan-barcode') }}" class="inline-block px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200">
+                Scan Barcode with Device
+            </a>
+        </div>
     </div>
 
     @push('scripts')
@@ -128,8 +135,8 @@
                     `;
                     html5QrcodeScanner = new Html5QrcodeScanner(
                         "reader",
-                        { 
-                            fps: 10, 
+                        {
+                            fps: 10,
                             qrbox: { width: 250, height: 250 },
                             aspectRatio: 1.0
                         }
@@ -145,8 +152,8 @@
 
             let html5QrcodeScanner = new Html5QrcodeScanner(
                 "reader",
-                { 
-                    fps: 10, 
+                {
+                    fps: 10,
                     qrbox: { width: 250, height: 250 },
                     aspectRatio: 1.0
                 }

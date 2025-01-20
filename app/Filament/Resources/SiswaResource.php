@@ -162,6 +162,11 @@ class SiswaResource extends Resource
                     ->icon('heroicon-o-pencil'),
                 DeleteAction::make()
                     ->icon('heroicon-o-trash'),
+                \Filament\Tables\Actions\Action::make('print')
+                    ->label('Print Kartu')
+                    ->icon('heroicon-o-printer')
+                    ->url(fn (Siswa $record): string => route('siswa.print-card', $record))
+                    ->openUrlInNewTab()
             ])
             //hapus data terpilih
 

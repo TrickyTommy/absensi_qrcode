@@ -15,7 +15,7 @@ class ListAbsensis extends ListRecords
         return [
             Actions\CreateAction::make(),
             Actions\Action::make('scan')
-                ->label('Scan QR Code')
+                ->label('Scan QR Code by Camera')
                 ->icon('heroicon-o-camera')
                 ->url(static::$resource::getUrl('scan'))
         ];

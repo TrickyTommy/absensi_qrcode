@@ -16,3 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/siswa/{siswa}/print-card', function (App\Models\Siswa $siswa) {
+    $renderer = new \BaconQrCode\Renderer\ImageRenderer(
+        new \BaconQrCode\Renderer\RendererStyle\RendererStyle(400),
+        new \BaconQrCode\Renderer\Image\SvgImageBackEnd()
+    );
+    $writer = new \BaconQrCode\Writer($renderer);
+    $qrCode = $writer->writeString($siswa->nis);
+
+    return view('student-card', [
+        'siswa' => $siswa,
+        'qrCode' => $qrCode
+    ]);
+})->name('siswa.print-card');

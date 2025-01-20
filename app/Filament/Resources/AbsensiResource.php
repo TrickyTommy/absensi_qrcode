@@ -26,11 +26,11 @@ class AbsensiResource extends Resource
     protected static ?string $model = Absensi::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
-    
+
     protected static ?string $navigationLabel = 'Absensi';
-    
+
     protected static ?string $pluralModelLabel = 'Absensi';
-    
+
     protected static ?string $modelLabel = 'Absensi';
 
     public static function form(Form $form): Form
@@ -97,14 +97,14 @@ class AbsensiResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -112,6 +112,8 @@ class AbsensiResource extends Resource
             'create' => Pages\CreateAbsensi::route('/create'),
             'edit' => Pages\EditAbsensi::route('/{record}/edit'),
             'scan' => Pages\ScanQrcode::route('/scan'),
+            'scan-qrcode' => Pages\ScanQrcode::route('/scan-qrcode'),
+            'scan-barcode' => Pages\ScanBarcode::route('/scan-barcode'), // Update this line
         ];
-    }    
+    }
 }
