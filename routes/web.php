@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,5 @@ Route::get('/siswa/{siswa}/print-card', function (App\Models\Siswa $siswa) {
         'qrCode' => $qrCode
     ]);
 })->name('siswa.print-card');
+
+Route::get('/siswa/bulk-print', [SiswaController::class, 'bulkPrint'])->name('siswa.bulk-print');

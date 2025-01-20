@@ -22,5 +22,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Livewire::component('scan-barcode-form', ScanBarcodeForm::class);
+
+        \Filament\Facades\Filament::registerRenderHook(
+            'filament.resources.siswa-resource.tables.bulk-actions.print-cards',
+            fn () => view('filament.resources.siswa-resource.tables.bulk-actions.print-cards')
+        );
     }
 }

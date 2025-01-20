@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Filament\Resources\SiswaResource\Pages;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use Illuminate\Http\Request;
+use App\Models\Student;
 
 class SiswaResource extends Resource
 {
@@ -177,9 +179,17 @@ class SiswaResource extends Resource
                     ->color('danger')
                     ->action(fn (Collection $records) => $records->each->delete())
                     ->requiresConfirmation()
-                    ->deselectRecordsAfterCompletion()
+                    ->deselectRecordsAfterCompletion(),
+                BulkAction::make('printCards')
+                    ->label('Print Kartu')
+                    ->icon('heroicon-o-printer')
+                    ->action(function (Collection $records) {
+                        $studentIds = $records->pluck('id')->toArray();
+                        return redirect()->route('siswa.bulk-print', ['student_ids' => $studentIds]);
+                    })
             ]);
     }
+
 
     public static function getRelations(): array
     {
