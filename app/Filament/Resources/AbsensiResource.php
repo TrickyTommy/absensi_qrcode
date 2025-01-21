@@ -63,6 +63,16 @@ class AbsensiResource extends Resource
                         TimePicker::make('jam_masuk')
                             ->default(now())
                             ->required(),
+                        Select::make('status')
+                            ->label('Status Kehadiran')
+                            ->options([
+                                'hadir' => 'Hadir',
+                                'sakit' => 'Sakit',
+                                'izin' => 'Izin',
+                                'alpha' => 'Alpha',
+                            ])
+                            ->default('hadir')
+                            ->required(),
                     ])
             ]);
     }
@@ -85,7 +95,9 @@ class AbsensiResource extends Resource
                 TextColumn::make('jam_masuk')
                     ->time()
                     ->sortable(),
-
+                TextColumn::make('status')
+                    ->label('Status Kehadiran')
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -113,7 +125,6 @@ class AbsensiResource extends Resource
             'edit' => Pages\EditAbsensi::route('/{record}/edit'),
             'scan' => Pages\ScanQrcode::route('/scan'),
             'scan-qrcode' => Pages\ScanQrcode::route('/scan-qrcode'),
-            'scan-barcode' => Pages\ScanBarcode::route('/scan-barcode'), // Update this line
         ];
     }
 }

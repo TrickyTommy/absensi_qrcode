@@ -23,6 +23,10 @@ class Absensi extends Model
         'jam_masuk' => 'datetime'
     ];
 
+    protected $attributes = [
+        'status' => 'hadir', // Default status
+    ];
+
     public function siswa()
     {
         return $this->belongsTo(Siswa::class);

@@ -42,7 +42,7 @@ class ScanBarcodeForm extends Component
                 'siswa_id' => $siswa->id,
                 'tanggal' => now()->setTimezone('Asia/Jakarta')->toDateString(),
                 'jam_masuk' => Carbon::now()->setTimezone('Asia/Jakarta')->format('H:i:s'),
-                'status' => 'hadir',
+                'status' => 'hadir', // Set status to 'hadir'
                 'keterangan' => 'Absen via barcode scanner'
             ]);
 
@@ -50,6 +50,7 @@ class ScanBarcodeForm extends Component
             $this->message = "Berhasil mencatat kehadiran {$siswa->nama}";
 
             $this->emit('barcodeScanComplete');
+            $this->emit('refreshTable'); // Add this line to refresh the table
 
         } catch (\Exception $e) {
             $this->status = 'error';
