@@ -7,7 +7,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f5f5f5;
+            background:rgb(245, 245, 245);
             margin: 0;
             padding: 20px;
         }
@@ -24,7 +24,7 @@
             width: 5.5cm;
             height: 8.5cm;
             padding: 15px;
-            background: white;
+            background: aqua;
             border-radius: 15px;
             margin: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -44,10 +44,14 @@
         }
 
         .header {
-            text-align: left;
+            display: flex;
             margin-bottom: 5px;
-            padding-bottom: 10px;
             border-bottom: 2px solid #f1f5f9;
+        }
+        .header .tittle{
+            padding:10px;
+            margin-top:auto;
+            margin-bottom:auto;
         }
 
         .header h2 {
@@ -64,6 +68,10 @@
             font-weight: 200;
         }
 
+        .header img{
+            width: 50px;
+        }
+
         .student-info {
             width: 100%;
             display: grid;
@@ -74,7 +82,7 @@
 
         .info-row {
             margin: 8px 0;
-            display: flex;
+
             align-items: center;
         }
 
@@ -86,33 +94,41 @@
 
         .info-row span {
             color: #0f172a;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 500;
+            display: block;
+
         }
         .box{
             border: solid 2px black;
             width: 3cm;
-            height: 4cm;
+            height: 2cm;
         }
 
+        .qr{
+            margin-top:0px;
+            position: absolute;
+            z-index: 1;
+            width: 200px;
+        }
         .qr-code {
+            margin-top:40px;
             text-align: center;
-            background: white;
             border-radius: 10px;
         }
-
+    
         .qr-code svg {
+            position: relative;
+            z-index: 2;
             max-width: 100px;
             height: auto;
+           
         }
 
-        .school-logo {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
-        }
 
         .validity {
+            position: relative;
+            z-index: 2;
             text-align: center;
             font-size: 10px;
             color: #64748b;
@@ -158,10 +174,18 @@
         @foreach ($students as $student)
             <div class="card">
                 <div class="header">
-                    <!-- Add your school logo here -->
-                    <!-- <img src="/path/to/logo.png" alt="School Logo" class="school-logo"> -->
-                    <h2>KARTU PELAJAR</h2>
-                    <h3>SMK BUDI MULIA KARAWANG</h3>
+                    <div class="logo">
+
+                        <!-- Add your school logo here -->
+                        <img src="{{ asset('images/logo_smk.png') }}" alt="School Logo" class="school-logo">
+                    </div>
+                    <div class="tittle">
+
+                            
+                            <h2>KARTU PELAJAR</h2>
+                            <h3>SMK BUDI MULIA KARAWANG</h3>
+                    </div>
+                    
                 </div>
                 <div class="student-info">
                     <div class="photo">
@@ -174,15 +198,14 @@
 
                         <div class="info-row">
                             <span>{{ $student->nama }}</span>
-                        </div>
-                        <div class="info-row">
                             <span>{{ $student->kelas }}</span>
-                        </div>
-                        <div class="info-row">
                             <span>{{ $student->jurusan }}</span>
                         </div>
+                        
                     </div>
                 </div>
+                
+                <img class="qr" src="{{ asset('images/barcode_bg.png') }}" alt="">
                 <div class="qr-code">
                     {!! $qrCodes[$student->id] !!}
                 </div>
