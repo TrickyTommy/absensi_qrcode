@@ -21,7 +21,8 @@
         }
 
         .card {
-            width: 250px;
+            width: 5.5cm;
+            height: 8.5cm;
             padding: 15px;
             background: white;
             border-radius: 15px;
@@ -43,8 +44,8 @@
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 15px;
+            text-align: left;
+            margin-bottom: 5px;
             padding-bottom: 10px;
             border-bottom: 2px solid #f1f5f9;
         }
@@ -52,22 +53,23 @@
         .header h2 {
             margin: 0;
             color: #1e293b;
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 15px;
+            font-weight: bold;
         }
 
         .header h3 {
-            margin: 5px 0 0;
+            margin-top: 0px;
             color: #64748b;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 10px;
+            font-weight: 200;
         }
 
         .student-info {
-            margin-bottom: 15px;
-            padding: 10px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 60% 40%;
+            grid-template-columns: 2;
             background: #f8fafc;
-            border-radius: 10px;
         }
 
         .info-row {
@@ -87,13 +89,16 @@
             font-size: 12px;
             font-weight: 500;
         }
+        .box{
+            border: solid 2px black;
+            width: 3cm;
+            height: 4cm;
+        }
 
         .qr-code {
             text-align: center;
-            padding: 10px;
             background: white;
             border-radius: 10px;
-            margin-top: 10px;
         }
 
         .qr-code svg {
@@ -109,7 +114,6 @@
 
         .validity {
             text-align: center;
-            margin-top: 10px;
             font-size: 10px;
             color: #64748b;
         }
@@ -160,21 +164,23 @@
                     <h3>SMK BUDI MULIA KARAWANG</h3>
                 </div>
                 <div class="student-info">
-                    <div class="info-row">
-                        <strong>NIS:</strong>
-                        <span>{{ $student->nis }}</span>
+                    <div class="photo">
+                        <div class="box">
+
+                        </div>
                     </div>
-                    <div class="info-row">
-                        <strong>Nama:</strong>
-                        <span>{{ $student->nama }}</span>
-                    </div>
-                    <div class="info-row">
-                        <strong>Kelas:</strong>
-                        <span>{{ $student->kelas }}</span>
-                    </div>
-                    <div class="info-row">
-                        <strong>Jurusan:</strong>
-                        <span>{{ $student->jurusan }}</span>
+
+                    <div class="student">
+
+                        <div class="info-row">
+                            <span>{{ $student->nama }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span>{{ $student->kelas }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span>{{ $student->jurusan }}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="qr-code">
