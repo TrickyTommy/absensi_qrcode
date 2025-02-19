@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\AbsensiResource\Pages;
 
 use App\Filament\Resources\AbsensiResource;
+use App\Filament\Widgets\ScanBarcodeWidget; // Add this import
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\View\View;
 
 class ListAbsensis extends ListRecords
 {
@@ -16,13 +16,8 @@ class ListAbsensis extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            // Widget akan ditambahkan nanti
+            ScanBarcodeWidget::class
         ];
-    }
-
-    protected function getTableContentFooter(): ?View
-    {
-        return view('filament.resources.absensi-resource.components.scan-barcode-footer');
     }
 
     protected function getActions(): array
