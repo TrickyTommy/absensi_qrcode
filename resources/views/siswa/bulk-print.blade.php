@@ -23,14 +23,16 @@
         .card {
             width: 5.5cm;
             height: 8.5cm;
-            padding: 15px;
-            background: aqua;
+            padding: 5px;
             border-radius: 15px;
             margin: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15    px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
             flex: 0 0 calc(33.333% - 20px);
+            background-image: url('{{ asset('images/background1.png') }}');
+            background-size: cover;
+            background-position: center;
         }
 
         .card::before {
@@ -45,10 +47,11 @@
 
         .header {
             display: flex;
+            margin-top:5px;
             margin-bottom: 5px;
             border-bottom: 2px solid #f1f5f9;
         }
-        .header .tittle{
+        .header .tittle{    
             padding:10px;
             margin-top:auto;
             margin-bottom:auto;
@@ -63,7 +66,7 @@
 
         .header h3 {
             margin-top: 0px;
-            color: #64748b;
+            color: #0666f0;
             font-size: 10px;
             font-weight: 200;
         }
@@ -77,12 +80,12 @@
             display: grid;
             grid-template-columns: 60% 40%;
             grid-template-columns: 2;
-            background: #f8fafc;
+            background: #05a5f82e;
         }
+      
 
         .info-row {
             margin: 8px 0;
-
             align-items: center;
         }
 
@@ -101,37 +104,30 @@
         }
         .box{
             border: solid 2px black;
-            width: 3cm;
-            height: 2cm;
+            width: 2cm;
+            height: 3cm;
         }
 
         .qr{
-            margin-top:0px;
-            position: absolute;
-            z-index: 1;
-            width: 200px;
+            left: 40px;
+            top:147px;
+            width: 150px;
         }
         .qr-code {
-            margin-top:40px;
             text-align: center;
             border-radius: 10px;
         }
     
         .qr-code svg {
-            position: relative;
-            z-index: 2;
             max-width: 100px;
             height: auto;
-           
         }
-
-
         .validity {
             position: relative;
-            z-index: 2;
             text-align: center;
-            font-size: 10px;
-            color: #64748b;
+            font-size: 7px;
+            color:rgb(6 102 240);
+            bottom:-1px
         }
 
         .no-print {
@@ -152,6 +148,14 @@
 
         .no-print button:hover {
             background: #1d4ed8;
+        }
+        .scan{
+            margin-bottom: 0px;
+            text-align: center;
+            font-size: 10px;
+            size: 30px;
+            font-weight: 500;
+            color:rgb(6, 6, 6);
         }
 
         @media print {
@@ -204,8 +208,10 @@
                         
                     </div>
                 </div>
+                <div class="scan">
+                    <p>SCAN MEE !</p>
+                </div>
                 
-                <img class="qr" src="{{ asset('images/barcode_bg.png') }}" alt="">
                 <div class="qr-code">
                     {!! $qrCodes[$student->id] !!}
                 </div>
